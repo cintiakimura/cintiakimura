@@ -1,0 +1,5 @@
+{
+  "name": "NotebookLM Clone",
+  "description": "A personal research assistant that lets you upload documents and ask questions using Gemini 2.5 Flash.",
+  "requestFramePermissions": []
+}
