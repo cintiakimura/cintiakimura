@@ -20,3 +20,18 @@ export enum ProcessingStatus {
   ERROR = 'ERROR',
   SUCCESS = 'SUCCESS'
 }
+
+export type SupportedLanguage = 'en' | 'es' | 'fr' | 'de' | 'jp' | 'pt';
+
+export interface StudioItem {
+  id: string;
+  type: 'podcast' | 'video' | 'slides' | 'infographic';
+  title: string;
+  content: string; // URL for media, or Markdown for text
+  status: ProcessingStatus;
+  language: SupportedLanguage;
+  createdAt: number;
+  // Metadata for history
+  originalPrompt?: string;
+  style?: string;
+}

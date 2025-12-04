@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { ChatInterface } from './components/ChatInterface';
-import { FileData, Message } from './types';
-import { Upload, BookOpen } from 'lucide-react';
+import { Studio } from './components/Studio';
+import { FileData } from './types';
+import { BookOpen } from 'lucide-react';
 
 const App: React.FC = () => {
   const [files, setFiles] = useState<FileData[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [currentView, setCurrentView] = useState<'chat' | 'studio'>('chat');
 
   const handleAddFiles = (newFiles: FileData[]) => {
     setFiles((prev) => [...prev, ...newFiles]);
@@ -39,6 +41,8 @@ const App: React.FC = () => {
           onAddFiles={handleAddFiles}
           onRemoveFile={handleRemoveFile}
           onCloseMobile={() => setIsSidebarOpen(false)}
+          currentView={currentView}
+          onChangeView={setCurrentView}
         />
       </div>
 
@@ -59,7 +63,13 @@ const App: React.FC = () => {
         </header>
         
         <main className="flex-1 overflow-hidden relative">
-          <ChatInterface files={files} />
+          {currentView === 'chat' ? (
+            <ChatInterface files={files} />
+          ) : (
+            <div className="h-full overflow-y-auto">
+              <Studio files={files} />
+            </div>
+          )}
         </main>
       </div>
 
